@@ -1,6 +1,6 @@
 /*
  * Carla Plugin Host
- * Copyright (C) 2011-2014 Filipe Coelho <falktx@falktx.com>
+ * Copyright (C) 2011-2018 Filipe Coelho <falktx@falktx.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -86,6 +86,32 @@ _CarlaScalePointInfo::~_CarlaScalePointInfo() noexcept
 {
     if (label != gNullCharPtr)
         delete[] label;
+}
+
+_CarlaMidiProgramData::_CarlaMidiProgramData() noexcept
+    : bank(0),
+      program(0),
+      name(gNullCharPtr) {}
+
+_CarlaMidiProgramData::~_CarlaMidiProgramData() noexcept
+{
+    if (name != gNullCharPtr)
+        delete[] name;
+}
+
+_CarlaCustomData::_CarlaCustomData() noexcept
+    : type(gNullCharPtr),
+      key(gNullCharPtr),
+      value(gNullCharPtr) {}
+
+_CarlaCustomData::~_CarlaCustomData() noexcept
+{
+    if (type != gNullCharPtr)
+        delete[] type;
+    if (key != gNullCharPtr)
+        delete[] key;
+    if (value != gNullCharPtr)
+        delete[] value;
 }
 
 _CarlaTransportInfo::_CarlaTransportInfo() noexcept

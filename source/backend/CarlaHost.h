@@ -1,6 +1,6 @@
-﻿/*
+/*
  * Carla Plugin Host
- * Copyright (C) 2011-2014 Filipe Coelho <falktx@falktx.com>
+ * Copyright (C) 2011-2018 Filipe Coelho <falktx@falktx.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -223,6 +223,70 @@ typedef struct _CarlaScalePointInfo {
 #endif
 
 } CarlaScalePointInfo;
+
+/*!
+ * MIDI Program data.
+ * @see carla_get_midi_program_data()
+ */
+typedef struct _CarlaMidiProgramData {
+    /*!
+     * MIDI bank.
+     */
+    uint32_t bank;
+
+    /*!
+     * MIDI program.
+     */
+    uint32_t program;
+
+    /*!
+     * MIDI program name.
+     */
+    const char* name;
+
+#ifdef __cplusplus
+    /*!
+     * C++ constructor and destructor.
+     */
+    CARLA_API _CarlaMidiProgramData() noexcept;
+    CARLA_API ~_CarlaMidiProgramData() noexcept;
+    CARLA_DECLARE_NON_COPY_STRUCT(_CarlaMidiProgramData)
+#endif
+
+} CarlaMidiProgramData;
+
+/*!
+ * Custom data, used for saving key:value 'dictionaries'.
+ * @see carla_get_parameter_scalepoint_info()
+ */
+typedef struct _CarlaCustomData {
+    /*!
+     * Value type, in URI form.
+     * @see CustomDataTypes
+     */
+    const char* type;
+
+    /*!
+     * Key.
+     * @see CustomDataKeys
+     */
+    const char* key;
+
+    /*!
+     * Value.
+     */
+    const char* value;
+
+#ifdef __cplusplus
+    /*!
+     * C++ constructor and destructor.
+     */
+    CARLA_API _CarlaCustomData() noexcept;
+    CARLA_API ~_CarlaCustomData() noexcept;
+    CARLA_DECLARE_NON_COPY_STRUCT(_CarlaCustomData)
+#endif
+
+} CarlaCustomData;
 
 /*!
  * Transport information.
@@ -609,7 +673,7 @@ CARLA_EXPORT const ParameterRanges* carla_get_parameter_ranges(uint pluginId, ui
  * @param midiProgramId MIDI Program index
  * @see carla_get_midi_program_count()
  */
-CARLA_EXPORT const MidiProgramData* carla_get_midi_program_data(uint pluginId, uint32_t midiProgramId);
+CARLA_EXPORT const CarlaMidiProgramData* carla_get_midi_program_data(uint pluginId, uint32_t midiProgramId);
 
 /*!
  * Get a plugin's custom data.
@@ -617,7 +681,7 @@ CARLA_EXPORT const MidiProgramData* carla_get_midi_program_data(uint pluginId, u
  * @param customDataId Custom data index
  * @see carla_get_custom_data_count()
  */
-CARLA_EXPORT const CustomData* carla_get_custom_data(uint pluginId, uint32_t customDataId);
+CARLA_EXPORT const CarlaCustomData* carla_get_custom_data(uint pluginId, uint32_t customDataId);
 
 /*!
  * Get a plugin's chunk data.
